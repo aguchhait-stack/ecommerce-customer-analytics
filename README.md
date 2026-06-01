@@ -125,7 +125,7 @@ pip install -r requirements.txt
 python3 main.py
 
 # Explore notebook
-jupyter notebook online_retail_uci.ipynb
+jupyter notebook notebook.ipynb
 ```
 ---
 
