@@ -11,7 +11,7 @@ def create_rfm(df_clean):
                 Frequency = ("Invoice","nunique"),
                 Monetary = ("TotalPrice","sum"))
         # Descriptive summary
-        print("=="*20)
+        print("\n"+"=="*20)
         print("Base RFM Metrics Summary")
         print("=="*20)
         print(f"\n{rfm.describe().round(2)}\n")

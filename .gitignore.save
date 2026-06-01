@@ -1,6 +1,7 @@
 # Mac system files
 .DS_Store
 .AppleDouble
+data.nosync/.DS_Store
 
 # Jupyter
 .ipynb_checkpoints/
@@ -16,10 +17,15 @@
 
 # Python
 __pycache__/
-*.pyc
-
-/.quarto/
-**/*.quarto_ipynb
+*.pycb
 
 # Requirements
 README_files/
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# IDE
+.vscode/
+.idea/

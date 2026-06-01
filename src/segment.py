@@ -6,10 +6,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.cluster import KMeans 
 
 def create_segment(rfm):
-    rfm_segment = rfm.copy()
+    rfm = rfm.copy()
 
     # Log1p transformation for right skwedness
-    X = np.log(rfm_segment[["Recency","Frequency","Monetary"]])
+    X = np.log(rfm[["Recency","Frequency","Monetary"]])
 
     # train-test split with 80% train set, random state for reproducibility
     X_train,X_test = train_test_split(X,test_size=0.2,random_state = 42)
@@ -26,13 +26,14 @@ def create_segment(rfm):
     test_labels = pipe.predict(X_test)
 
     # assign labels back to rfm tables with right index
-    rfm_segment.loc[X_train.index,'KMeans_Segment'] = train_labels
-    rfm_segment.loc[X_test.index,'KMeans_Segment'] = test_labels
-    rfm_segment['KMeans_Segment'] = rfm_segment['KMeans_Segment'].astype(int)
+    rfm.loc[X_train.index,'KMeans_Segment'] = train_labels
+    rfm.loc[X_test.index,'KMeans_Segment'] = test_labels
+    rfm['KMeans_Segment'] = rfm['KMeans_Segment'].astype(int)
 
-    # Adding Cluster name accoding to business interpretation; Refer notebook for details
+    # Adding Cluster name accoding to business interpretation
+    # Refer the noetbook.ipynb for rationale
 
-    rfm_segment['KMeans_Segment_name'] = rfm_segment['KMeans_Segment']\
+    rfm['KMeans_Segment_name'] = rfm['KMeans_Segment']\
                                             .map({2:'Champions',
                                                 0:'Promising',
                                                 3:"At Risk",
@@ -43,13 +44,13 @@ def create_segment(rfm):
     print("=="*25)
     print("KMeans Segment Analysis")
     print("=="*25)
-    print(rfm_segment.groupby("KMeans_Segment_name").agg(
+    print(rfm.groupby("KMeans_Segment_name").agg(
        {"Recency"  :  "mean",
         "Frequency":  "mean",
         "Monetary" :  "mean"}
     ).sort_values('Monetary').round(2))
 
-    return rfm_segment
+    return rfm
 
 
         

@@ -1,7 +1,7 @@
 import pandas as pd
 def cleaning(df):
     
-    # Refer tge noetbook for cleaning rational
+    # Refer the noetbook.ipynb for cleaning rationale
 
     df_clean = df.copy() # Copy for reproducibility
     
@@ -33,7 +33,7 @@ def cleaning(df):
     print("\nRows dropped after cleaning:")
     print(f"{(len(df) - len(df_clean)) * 100 / len(df):.2f}%")
 
-    print("\nOverview:")
+    print("\nSummary:\n")
     df_clean.info()
     
     # Re-index after row deletion
